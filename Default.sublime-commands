@@ -6,5 +6,9 @@
 	{
 		"caption": "SxS Key Bindings",
 		"command": "sxs_key_bindings"
+	},
+	{
+		"caption": "SxS Commands",
+		"command": "sxs_commands"
 	}
 ]

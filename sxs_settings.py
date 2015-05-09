@@ -20,9 +20,13 @@ def openWindow(self, winType):
 		leftFile = "${packages}/Default/Default ($platform).sublime-keymap"
 		rightFile = "${packages}/User/Default ($platform).sublime-keymap"
 		rightContents = "[\n\t$0\n]\n"
-
-	new_window.run_command("open_file", {'file': leftFile, 'caption': caption + " - Default"})
-	new_window.run_command("open_file", {'file': rightFile, 'caption': caption + " - User", 'contents': rightContents})
+	elif winType == "commands":
+		caption = "Commands"
+		leftFile = "${packages}/Default/Default.sublime-commands"
+		rightFile = "${packages}/User/Default.sublime-commands"
+		rightContents = "[\n\t$0\n]\n"
+	new_window.run_command("open_file", {'file': leftFile, 'caption': caption})
+	new_window.run_command("open_file", {'file': rightFile, 'caption': caption, 'contents': rightContents})
 	new_window.set_view_index(new_window.active_view(), 1, 0)
 
 class sxsSettingsCommand(sublime_plugin.WindowCommand):
@@ -32,3 +36,6 @@ class sxsSettingsCommand(sublime_plugin.WindowCommand):
 class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
 		openWindow(self.window, "keybindings")
+class sxsCommandsCommand(sublime_plugin.WindowCommand):
+	def run(self):
+		openWindow(self.window, "commands")
