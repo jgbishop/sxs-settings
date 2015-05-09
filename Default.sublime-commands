@@ -1,0 +1,10 @@
+[
+	{
+		"caption": "SxS: Settings",
+		"command": "sxs_settings"
+	},
+	{
+		"caption": "SxS: Key Bindings",
+		"command": "sxs_key_bindings"
+	}
+]
