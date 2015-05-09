@@ -1,0 +1,5 @@
+{
+	// Specifies whether to arrange the views vertically using rows instead of
+	// horizontally using columns. Default value is false.
+	"display_using_rows" : false
+}

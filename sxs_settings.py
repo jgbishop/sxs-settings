@@ -1,14 +1,27 @@
 import sublime, sublime_plugin
 
-def openWindow(self, winType):
+PREF_USE_ROWS_DEFAULT = False
+
+def getSetting(pref, default):
+	return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
+
+def openWindow(self, winType, useRows):
 	# Self in this context is the active window
 	self.run_command("new_window")
 	new_window = sublime.active_window()
-	new_window.set_layout({
-	    "cols": [0, 0.5, 1],
-	    "rows": [0, 1],
-	    "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
-	})
+
+	if useRows == True:
+		new_window.set_layout({
+		    "cols": [0, 1],
+		    "rows": [0, 0.5, 1],
+		    "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
+		})
+	else:
+		new_window.set_layout({
+		    "cols": [0, 0.5, 1],
+		    "rows": [0, 1],
+		    "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+		})
 
 	if winType == "settings":
 		caption = "Settings"
@@ -27,8 +40,8 @@ def openWindow(self, winType):
 
 class sxsSettingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
-		openWindow(self.window, "settings")
+		openWindow(self.window, "settings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
 
 class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
-		openWindow(self.window, "keybindings")
+		openWindow(self.window, "keybindings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))

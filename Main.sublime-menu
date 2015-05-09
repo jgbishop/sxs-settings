@@ -1,0 +1,37 @@
+[
+	{
+		"caption": "Preferences",
+		"mnemonic": "n",
+		"id": "preferences",
+		"children":
+		[
+			{
+				"caption": "Package Settings",
+				"mnemonic": "P",
+				"id": "package-settings",
+				"children":
+				[
+					{
+						"caption": "SxS Settings",
+						"children":
+						[
+							{
+								"command": "open_file",
+								"caption": "Settings - Default",
+								"args": { "file": "${packages}/sxs_settings/sxs_settings.sublime-settings" }
+							},
+							{
+								"command": "open_file",
+								"caption": "Settings - User",
+								"args": { "file": "${packages}/User/sxs_settings.sublime-settings", "contents": "{\n\t$0\n}\n" }
+							},
+							{
+								"caption": "-"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

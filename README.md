@@ -1,4 +1,4 @@
-# SxS Settings
+# SxS (Side-by-Side) Settings
 
 A Sublime Text plugin for viewing default and user settings side by side. Works
 for key bindings too!
