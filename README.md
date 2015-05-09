@@ -21,8 +21,8 @@ using Git, if you're so inclined.
 
 SxS Settings adds two commands to the command palette:
 
-* **SxS Settings** - Opens Sublime Text settings side by side
-* **SxS Key Bindings** - Opens Sublime Text key bindings side by side
+* **SxS Settings** - Opens Sublime Text settings side by side in a new window
+* **SxS Key Bindings** - Opens Sublime Text key bindings side by side in a new window
 
 If you want to bind these commands to a shortcut key, the internal command names
 to use in the binding are:
@@ -30,7 +30,7 @@ to use in the binding are:
 * sxs_settings
 * sxs_key_bindings
 
-## Future Features
+## Future Development
 At the moment, this plugin is pretty bare-bones. I have a number of items I'd
 like to implement, each of which are listed on the GitHub issues list for this
 project. Pull requests are welcome! Though I'm a fairly seasoned programmer, I'm
