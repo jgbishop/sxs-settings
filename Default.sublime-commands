@@ -6,5 +6,21 @@
 	{
 		"caption": "SxS Key Bindings",
 		"command": "sxs_key_bindings"
+	},
+	{
+		"caption": "SxS Commands",
+		"command": "sxs_commands"
+	},
+	{
+		"caption": "SxS Settings in Rows",
+		"command": "sxs_settings_rows"
+	},
+	{
+		"caption": "SxS Key Bindings in Rows",
+		"command": "sxs_key_bindings_rows"
+	},
+	{
+		"caption": "SxS Commands in Rows",
+		"command": "sxs_commands_rows"
 	}
 ]
