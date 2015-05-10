@@ -5,6 +5,9 @@ PREF_USE_ROWS_DEFAULT = False
 def getSetting(pref, default):
 	return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
+def closeWindow(self):
+	self.run_command("close_window")
+
 def openWindow(self, winType, useRows):
 	# Self in this context is the active window
 	self.run_command("new_window")
@@ -68,9 +71,20 @@ def openWindow(self, winType, useRows):
 
 	new_window.set_view_index(new_window.active_view(), 1, 0)
 
+
+class sxsSettingsCommand(sublime_plugin.WindowCommand):
+	def run(self):
+		openWindow(self.window,"settings",getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
+
+class sxsSettings(sublime_plugin.EventListener):
+	def on_new(self, view):
+		if not self.active_window():
+			closeWindow(self.window)
+
 class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
 		openWindow(self.window, "keybindings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
+
 
 class sxsMouseBindingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
