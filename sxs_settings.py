@@ -68,10 +68,6 @@ def openWindow(self, winType, useRows):
 
 	new_window.set_view_index(new_window.active_view(), 1, 0)
 
-class sxsSettingsCommand(sublime_plugin.WindowCommand):
-	def run(self):
-		openWindow(self.window, "settings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
-
 class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
 		openWindow(self.window, "keybindings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
