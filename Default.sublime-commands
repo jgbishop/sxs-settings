@@ -17,7 +17,11 @@
 	},
 	{
 		"caption":"SxS Sidebar Menu",
+<<<<<<< HEAD
 		"command":"sxs_sidebar_menu"
+=======
+		"command": "sxs_sidebar_menu"
+>>>>>>> 18fa18af44d9581ca9fc38b2c36a3174260effbd
 	}
 
 ]
