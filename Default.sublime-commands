@@ -10,5 +10,13 @@
 	{
 		"caption":"SxS Mouse Bindings",
 		"command":"sxs_mouse_bindings"
+	},
+	{
+		"caption":"SxS Main Menu",
+		"command":"sxs_main_menu"
+	},
+	{
+		"caption":"SxS Sidebar Menu",
+		"command": "sxs_sidebar_menu"
 	}
 ]
