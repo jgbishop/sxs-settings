@@ -1,14 +1,26 @@
 import sublime, sublime_plugin
 
+_WINDOW_ID = None
 PREF_USE_ROWS_DEFAULT = False
 
 def getSetting(pref, default):
 	return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
 def openWindow(self, winType, useRows):
+	global _WINDOW_ID
+
+	if _WINDOW_ID is not None:
+		windowList = sublime.windows()
+		for i,w in enumerate(windowList):
+			if w.id() == _WINDOW_ID:
+				w.run_command("close_window")
+				_WINDOW_ID = None
+				return
+
 	# Self in this context is the active window
 	self.run_command("new_window")
 	new_window = sublime.active_window()
+	_WINDOW_ID = new_window.id()
 
 	if useRows == True:
 		new_window.set_layout({
