@@ -1,0 +1,6 @@
+[
+	{"keys":["ctrl+alt+s"],"command":"side_by_side_settings"},
+	{"keys":["ctrl+alt+k"],"command":"side_by_side_key_maps"},
+	{"keys":["ctrl+alt+m"],"command":"side_by_side_mouse_maps"},
+	{"keys":["ctrl+alt+c"],"command":"side_by_side_commands"}
+]
