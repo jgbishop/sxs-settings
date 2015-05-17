@@ -1,10 +1,18 @@
 [
 	{
 		"caption": "Side-by-Side Settings",
-		"command": "sxs_settings"
+		"command": "side_by_side_settings"
 	},
 	{
 		"caption": "Side-by-Side Key Bindings",
-		"command": "sxs_key_bindings"
+		"command": "side_by_side_key_maps"
+	},
+	{
+		"caption": "Side-by-Side Mouse Bindings",
+		"command": "side_by_side_mouse_maps"
+	},
+	{
+		"caption": "Side-by-Side Commands",
+		"command": "side_by_side_commands"
 	}
 ]
