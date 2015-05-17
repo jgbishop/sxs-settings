@@ -18,12 +18,12 @@
 							{
 								"command": "open_file",
 								"caption": "Settings - Default",
-								"args": { "file": "${packages}/sxs_settings/sxs_settings.sublime-settings" }
+								"args": { "file": "${packages}/Side by Side/side_by_side.sublime-settings" }
 							},
 							{
 								"command": "open_file",
 								"caption": "Settings - User",
-								"args": { "file": "${packages}/User/sxs_settings.sublime-settings", "contents": "{\n\t$0\n}\n" }
+								"args": { "file": "${packages}/User/side_by_side.sublime-settings", "contents": "{\n\t$0\n}\n" }
 							},
 							{
 								"caption": "-"
@@ -32,6 +32,17 @@
 					}
 				]
 			}
+		]
+	},
+	{
+		"caption":"Side by Side",
+		"id":"side_by_side",
+		"children":
+		[
+			{"caption":"Side by Side Settings","command":"side_by_side_settings"},
+			{"caption":"Side by Side Key Bindings","command":"side_by_side_key_maps"},
+			{"caption":"Side by Side Mouse Bindings","command":"side_by_side_mouse_maps"},
+			{"caption":"Side by Side Commands","command":"side_by_side_commands"}
 		]
 	}
 ]
