@@ -1,0 +1,12 @@
+[
+	{
+		"caption":"Side by Side",
+		"id":"side_by_side",
+		"children": [
+			{"caption":"Side by Side Settings","command":"side_by_side_settings"},
+			{"caption":"Side by Side Key Bindings","command":"side_by_side_key_maps"},
+			{"caption":"Side by Side Mouse Bindings","command":"side_by_side_mouse_maps"},
+			{"caption":"Side by Side Commands","command":"side_by_side_commands"}
+		]
+	}
+]
