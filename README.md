@@ -25,16 +25,20 @@ Side-by-Side Settings currently adds two commands to the command palette:
 
 * **Side-by-Side Settings** - Opens both default and user Sublime Text settings side by side in a new window
 * **Side-by-Side Key Bindings** - Opens both default and user Sublime Text key bindings side by side in a new window
+* **Side-by-Side Mouse Bindings** - Opens both default and user Sublime Text mouse bindings side by side in a new window
+* **Side-by-Side Commands** - Opens both default and user Sublime Text commands side by side in a new window
 
 If you want to bind these commands to a shortcut key, the internal command names
 to use in the binding are:
 
-* sxs_settings
-* sxs_key_bindings
+* side_by_side_settings
+* side_by_side_key_maps
+* side_by_side_mouse_maps
+* side_by_side_commands
 
 Here's an example key binding:
 
-`{ "keys": ["ctrl+k", "ctrl+p"], "command": "sxs_settings" }`
+`{ "keys": ["ctrl+k", "ctrl+p"], "command": "side_by_side_settings" }`
 
 ## Future Development
 At the moment, this plugin is pretty bare-bones. I have a number of items I'd
