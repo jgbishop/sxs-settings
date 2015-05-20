@@ -17,7 +17,11 @@ Settings** in the `Install Package` command window.
 
 #### Git Clone
 You can also clone this repository into your Sublime Text Packages directory
-using Git, if you feel so inclined.
+using Git, if you feel so inclined. If you do use Git, make sure to clone using
+the appropriate folder name of **Side-by-Side Settings** (so that the menu items
+work as expected). Here's an example git clone command using SSH:
+
+`git clone git@github.com:jgbishop/sxs-settings.git "Side-by-Side Settings"`
 
 ## Usage
 
