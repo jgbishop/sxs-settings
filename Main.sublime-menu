@@ -18,7 +18,7 @@
 							{
 								"command": "open_file",
 								"caption": "Settings - Default",
-								"args": { "file": "${packages}/sxs_settings/sxs_settings.sublime-settings" }
+								"args": { "file": "${packages}/Side-by-Side Settings/sxs_settings.sublime-settings" }
 							},
 							{
 								"command": "open_file",
