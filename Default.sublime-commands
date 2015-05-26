@@ -6,5 +6,22 @@
 	{
 		"caption": "Side-by-Side Key Bindings",
 		"command": "sxs_key_bindings"
+	},
+	{
+		"caption":"SxS Mouse Bindings",
+		"command":"sxs_mouse_bindings"
+	},
+	{
+		"caption":"SxS Main Menu",
+		"command":"sxs_main_menu"
+	},
+	{
+		"caption":"SxS Sidebar Menu",
+<<<<<<< HEAD
+		"command":"sxs_sidebar_menu"
+=======
+		"command": "sxs_sidebar_menu"
+>>>>>>> 18fa18af44d9581ca9fc38b2c36a3174260effbd
 	}
+
 ]

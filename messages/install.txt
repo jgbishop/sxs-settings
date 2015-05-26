@@ -1,0 +1,8 @@
+Welcome to SxS Settings 1.2.0
+=============================
+
+ - Added Messaging
+ - Added sxsMouseMapsCommand
+ - Added sxsCommandsCommand
+ - Added sxsMainMenuCommand
+ - Added sxsSidebarMenuCommand
