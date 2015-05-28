@@ -1,5 +1,11 @@
 # Side-by-Side Settings Changelog
 
+## 1.3.0
+* Added a new command allowing users to select the file to compare (see the README for information on how to use this new feature)
+* Added a default key mapping providing a keyboard shortcut for the newly added select a file command
+* Modified command labels slightly
+* Expanded the README file considerably
+
 ## 1.2.1
 * Fixed the menu link to the default plugin settings file
 * Added additional information to the README on cloning with Git
