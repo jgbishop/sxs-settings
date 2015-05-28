@@ -1,4 +1,4 @@
-# Side-by-Side Settings Changelog
+# Side-by-Side Settings Change Log
 
 ## 1.3.0
 * Added a new command allowing users to select the file to compare (see the README for information on how to use this new feature)
