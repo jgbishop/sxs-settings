@@ -27,6 +27,16 @@
 							},
 							{
 								"caption": "-"
+							},
+							{
+								"command": "open_file",
+								"caption": "Post-Install Readme",
+								"args": { "file": "${packages}/Side-by-Side Settings/post_install_readme.txt" }
+							},
+							{
+								"command": "open_file",
+								"caption": "Change Log",
+								"args": { "file": "${packages}/Side-by-Side Settings/CHANGELOG.md" }
 							}
 						]
 					}
