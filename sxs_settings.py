@@ -1,28 +1,31 @@
 import sublime, sublime_plugin
+import re
 
 _WINDOW_ID = None
-PREF_USE_ROWS_DEFAULT = False
+
+def closeWindowIfNeeded(self):
+	global _WINDOW_ID
+
+	if _WINDOW_ID is not None:
+		for i,w in enumerate(sublime.windows()):
+			if w.id() == _WINDOW_ID:
+				w.run_command("close_window")
+				_WINDOW_ID = None
+				return True
+	return False
 
 def getSetting(pref, default):
 	return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
-def openWindow(self, winType, useRows):
+def openWindow(self, leftPath):
 	global _WINDOW_ID
-
-	if _WINDOW_ID is not None:
-		windowList = sublime.windows()
-		for i,w in enumerate(windowList):
-			if w.id() == _WINDOW_ID:
-				w.run_command("close_window")
-				_WINDOW_ID = None
-				return
 
 	# Self in this context is the active window
 	self.run_command("new_window")
 	new_window = sublime.active_window()
 	_WINDOW_ID = new_window.id()
 
-	if useRows == True:
+	if getSetting('display_using_rows', False) == True:
 		new_window.set_layout({
 		    "cols": [0, 1],
 		    "rows": [0, 0.5, 1],
@@ -35,25 +38,64 @@ def openWindow(self, winType, useRows):
 		    "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
 		})
 
-	if winType == "settings":
-		caption = "Settings"
-		leftFile = "${packages}/Default/Preferences.sublime-settings"
-		rightFile = "${packages}/User/Preferences.sublime-settings"
-		rightContents = "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by file type specific settings.\n{\n\t$0\n}\n"
-	elif winType == "keybindings":
-		caption = "Key Bindings"
-		leftFile = "${packages}/Default/Default ($platform).sublime-keymap"
-		rightFile = "${packages}/User/Default ($platform).sublime-keymap"
-		rightContents = "[\n\t$0\n]\n"
+	if getSetting('open_in_distraction_free', False) == True:
+		new_window.run_command('toggle_distraction_free')
+		new_window.run_command('toggle_tabs')
 
-	new_window.run_command("open_file", {'file': leftFile, 'caption': caption + " - Default"})
-	new_window.run_command("open_file", {'file': rightFile, 'caption': caption + " - User", 'contents': rightContents})
+	lastSlash = leftPath.rfind("/")
+	rightPath = leftPath[(lastSlash+1):] # Extract the filename
+
+	# Test to see if we are opening a platform-specific settings file. If so,
+	# strip the platform specific portion of the filename (platform-specific
+	# files are ignored in the User directory)
+	if re.search(r" \((?:Linux|OSX|Windows)\).sublime-settings", rightPath):
+		rightPath = re.sub(r" \((?:Linux|OSX|Windows)\)", "", rightPath)
+
+	rightContents = "{\n\t$0\n}\n" # Default to object notation for sublime-settings files
+	if re.search(r"\.sublime-keymap", leftPath):
+		rightContents = "[\n\t$0\n]\n"; # Use array notation for sublime-keymap files
+
+	new_window.run_command("open_file", {'file': "${packages}/" + leftPath})
+	new_window.run_command("open_file", {'file': "${packages}/User/" + rightPath, 'contents': rightContents })
 	new_window.set_view_index(new_window.active_view(), 1, 0)
 
 class sxsSettingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
-		openWindow(self.window, "settings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
+		if closeWindowIfNeeded(self) == True:
+			return
+		openWindow(self.window, "Default/Preferences.sublime-settings")
 
 class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
-		openWindow(self.window, "keybindings", getSetting('display_using_rows', PREF_USE_ROWS_DEFAULT))
+		if closeWindowIfNeeded(self) == True:
+			return
+		openWindow(self.window, "Default/Default ($platform).sublime-keymap")
+
+class sxsSelectCommand(sublime_plugin.WindowCommand):
+	fileList = []
+
+	def run(self):
+		if closeWindowIfNeeded(self) == True:
+			return
+
+		self.fileList[:] = [] # Clear our cache
+
+		settingsList = sublime.find_resources("*.sublime-settings")
+		keymapList = sublime.find_resources("*.sublime-keymap")
+
+		tempList = settingsList + keymapList
+
+		for i, item in enumerate(tempList):
+			tempItem = re.sub(r"^Packages/", "", item)
+			if re.match(r"User/", tempItem):
+				continue # Ignore anything we find in the User directory (those will get treated as "right pane" files)
+			else:
+				self.fileList.append(tempItem)
+
+		self.fileList.sort()
+		self.window.show_quick_panel(self.fileList, self.onDone)
+
+	def onDone(self, index):
+		if index == -1:
+			return
+		openWindow(self.window, self.fileList[index])

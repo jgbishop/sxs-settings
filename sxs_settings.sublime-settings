@@ -1,5 +1,10 @@
 {
 	// Specifies whether to arrange the views vertically using rows instead of
 	// horizontally using columns. Default value is false.
-	"display_using_rows" : false
+	"display_using_rows" : false,
+
+	// Specifies whether to open Side-by-Side comparison windows in distraction
+	// free mode, essentially forcing the comparison window to be full screen.
+	// Default value is false.
+	"open_in_distraction_free": false
 }
