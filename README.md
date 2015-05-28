@@ -50,9 +50,9 @@ specific files in the `User` directory are ignored by Sublime Text.
 
 #### Easily Closing a Side-by-Side Window
 
-To easily close the window that opens up when a Side-by-Side Settings command is
-issued, simply issue the command a second time. The window that opened up will
-be closed for you! This is a particularly helpful feature when a command is
+To close the window that opens up when a Side-by-Side Settings command is
+issued, simply issue the same command a second time. The window that opened up
+will be closed for you! This is a particularly helpful feature when a command is
 bound to a keyboard shortcut.
 
 #### Default Keyboard Shortcut

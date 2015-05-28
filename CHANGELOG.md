@@ -4,6 +4,7 @@
 * Added a new command allowing users to select the file to compare (see the README for information on how to use this new feature)
 * Added a default key mapping providing a keyboard shortcut for the newly added select a file command
 * Modified command labels slightly
+* Added a messaging system to display a user-guide after installing, and to display the release notes when upgrading
 * Expanded the README file considerably
 
 ## 1.2.1
