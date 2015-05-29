@@ -45,10 +45,23 @@ def openWindow(self, leftPath):
 	lastSlash = leftPath.rfind("/")
 	rightPath = leftPath[(lastSlash+1):] # Extract the filename
 
+	# If we're opening a .sublime-keymap file, the right pane should always open
+	# to "Default ({platform}).sublime-keymap" since that's where keys should be
+	# put.
+	if re.search(r"\.sublime-keymap", leftPath):
+		platform = "Windows" # Assume this to start (evil, I know)
+		plat = sublime.platform()
+		if plat == "linux":
+			platform = "Linux"
+		elif plat == "osx":
+			platform = "OSX"
+
+		rightPath = "Default (" + platform + ").sublime-keymap"
+
 	# Test to see if we are opening a platform-specific settings file. If so,
 	# strip the platform specific portion of the filename (platform-specific
 	# files are ignored in the User directory)
-	if re.search(r" \((?:Linux|OSX|Windows)\).sublime-settings", rightPath):
+	elif re.search(r" \((?:Linux|OSX|Windows)\).sublime-settings", leftPath):
 		rightPath = re.sub(r" \((?:Linux|OSX|Windows)\)", "", rightPath)
 
 	rightContents = "{\n\t$0\n}\n" # Default to object notation for sublime-settings files

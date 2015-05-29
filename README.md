@@ -34,19 +34,21 @@ Side-by-Side Settings adds three new commands to the command palette:
 
 The "select a file" command opens a quick panel that displays all of the 
 `.sublime-settings` and `.sublime-keymap` files that Sublime Text knows about
-(note that files located in the `{Packages}/User` directory are filtered out of
+(note that files located in the `Packages/User` directory are filtered out of
 this list; more on why it does this in a second). When a file in the quick panel
 is selected, it becomes the "left" (or "top", depending on your settings) panel
 in the comparison window. The "right" (or "bottom") panel will contain the
-corresponding user settings file, typically located in the `{Packages}\User`
+corresponding user settings file, typically located in the `Packages\User`
 directory (hence why files in `User` are filtered out).
 
 Side-by-Side Settings tries to do the correct thing depending on the file you
 select in the quick panel. If the file you select is a platform-specific
 settings file (e.g. `Default/Preferences (Windows).sublime-settings`), the
 corresponding user file that gets opened will be `Preferences.sublime-settings`
-(in the `{Packages}/User` directory). This is due to the fact that platform-
-specific files in the `User` directory are ignored by Sublime Text.
+(in the `Packages/User` directory). This is due to the fact that platform-
+specific files in the `User` directory are ignored by Sublime Text. Likewise, if
+you select any `.sublime-keymap` file, the appropriate platform-specific
+`.sublime-keymap` file in the `User` directory will be opened.
 
 #### Easily Closing a Side-by-Side Window
 

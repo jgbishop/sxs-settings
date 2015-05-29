@@ -31,7 +31,9 @@ select in the quick panel. If the file you select is a platform-specific
 settings file (e.g. Default/Preferences (Windows).sublime-settings), the
 corresponding user file that gets opened will be Preferences.sublime-settings
 (in the Packages/User directory). This is due to the fact that platform-
-specific files in the User directory are ignored by Sublime Text.
+specific files in the User directory are ignored by Sublime Text.  Likewise, if
+you select any .sublime-keymap file, the appropriate platform-specific
+.sublime-keymap file in the User directory will be opened.
 
 Note that this command is bound to the Ctrl+K, Ctrl+S key chord by default.
 
