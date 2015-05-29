@@ -71,7 +71,7 @@ class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 			return
 		openWindow(self.window, "Default/Default ($platform).sublime-keymap")
 
-class sxsSelectCommand(sublime_plugin.WindowCommand):
+class sxsSelectFileCommand(sublime_plugin.WindowCommand):
 	fileList = []
 
 	def run(self):
