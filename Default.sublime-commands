@@ -1,14 +1,14 @@
 [
 	{
+		"caption": "Side-by-Side: Select a File",
+		"command": "sxs_select_file"
+	},
+	{
 		"caption": "Side-by-Side: Sublime Settings",
 		"command": "sxs_settings"
 	},
 	{
 		"caption": "Side-by-Side: Sublime Key Bindings",
 		"command": "sxs_key_bindings"
-	},
-	{
-		"caption": "Side-by-Side: Select a File",
-		"command": "sxs_select_file"
 	}
 ]
