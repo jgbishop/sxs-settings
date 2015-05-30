@@ -24,13 +24,16 @@ work as expected). Here's an example git clone command using SSH:
 
 ## Usage
 
-Side-by-Side Settings adds three new commands to the command palette:
+Side-by-Side Settings adds three new commands to the command palette (two if you
+are using Sublime Text 2):
 
-* **Side-by-Side: Select a File** - Opens a panel displaying all of the `.sublime-settings` and `.sublime-keymap` files in the Sublime Text environment
+* **Side-by-Side: Select a File** - Opens a panel displaying all of the `.sublime-settings` and `.sublime-keymap` files in the Sublime Text environment (Sublime Text 3 only)
 * **Side-by-Side: Sublime Settings** - Opens both default and user Sublime Text settings side by side in a new window
 * **Side-by-Side: Sublime Key Bindings** - Opens both default and user Sublime Text key bindings side by side in a new window
 
 #### Select a File Command
+
+This command is only available in Sublime Text 3.
 
 The "select a file" command opens a quick panel that displays all of the 
 `.sublime-settings` and `.sublime-keymap` files that Sublime Text knows about
