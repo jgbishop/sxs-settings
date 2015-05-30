@@ -1,0 +1,30 @@
+-------------------------------------
+Side-by-Side Settings - Version 1.3.0
+-------------------------------------
+
+This update contains a brand new command for Sublime Text 3 users:
+
+  Side-by-Side: Select a File
+
+By default, this command is bound to the Ctrl+K, Ctrl+S key-chord.
+
+-------------------------------
+Using the Select a File Command
+-------------------------------
+The "select a file" command opens a quick panel that displays all of the 
+.sublime-settings and .sublime-keymap files that Sublime Text knows about
+(note that files located in the Packages/User directory are filtered out of
+this list; more on why it does this in a second). When a file in the quick panel
+is selected, it becomes the "left" (or "top", depending on your settings) panel
+in the comparison window. The "right" (or "bottom") panel will contain the
+corresponding user settings file, typically located in the Packages/User
+directory (hence why files in Packages/User are filtered out of the list).
+
+Side-by-Side Settings tries to do the correct thing depending on the file you
+select in the quick panel. If the file you select is a platform-specific
+settings file (e.g. Default/Preferences (Windows).sublime-settings), the
+corresponding user file that gets opened will be Preferences.sublime-settings
+(in the Packages/User directory). This is due to the fact that platform-
+specific files in the User directory are ignored by Sublime Text. Likewise, if
+you select a .sublime-keymap file, the appropriate platform-specific
+.sublime-keymap file in the User directory will be opened.

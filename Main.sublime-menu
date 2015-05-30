@@ -31,7 +31,7 @@
 							{
 								"command": "open_file",
 								"caption": "Post-Install Readme",
-								"args": { "file": "${packages}/Side-by-Side Settings/post_install_readme.txt" }
+								"args": { "file": "${packages}/Side-by-Side Settings/messages/post_install_readme.txt" }
 							},
 							{
 								"command": "open_file",
