@@ -1,10 +1,12 @@
 Thanks for installing the Side-by-Side Settings plug-in for Sublime Text! This
-plug-in adds three new commands to the command palette:
+plug-in adds three new commands to the command palette (only two are added in
+Sublime Text 2):
 
   1. Side-by-Side: Select a File (Ctrl+K, Ctrl+S)
-     Opens a panel displaying all of the .sublime-settings and .sublime-keymap
-     files in the Sublime Text environment. For more on how to use this command,
-     see the corresponding section below.
+     Note that this command is only available in Sublime Text 3. Opens a panel
+     displaying all of the .sublime-settings and .sublime-keymap files in the
+     Sublime Text environment. For more on how to use this command, see the
+     corresponding section below.
 
   2. Side-by-Side: Sublime Settings
      Opens both default and user Sublime Text settings side by side in a new
@@ -15,7 +17,7 @@ plug-in adds three new commands to the command palette:
      window
 
 ================================================================================
-Using the Select a File Command
+Using the Select a File Command (Sublime Text 3 Only)
 ================================================================================
 The "select a file" command opens a quick panel that displays all of the 
 .sublime-settings and .sublime-keymap files that Sublime Text knows about
@@ -23,7 +25,7 @@ The "select a file" command opens a quick panel that displays all of the
 this list; more on why it does this in a second). When a file in the quick panel
 is selected, it becomes the "left" (or "top", depending on your settings) panel
 in the comparison window. The "right" (or "bottom") panel will contain the
-corresponding user settings file, typically located in the Packages\User
+corresponding user settings file, typically located in the Packages/User
 directory (hence why files in Packages/User are filtered out of the list).
 
 Side-by-Side Settings tries to do the correct thing depending on the file you
@@ -31,11 +33,12 @@ select in the quick panel. If the file you select is a platform-specific
 settings file (e.g. Default/Preferences (Windows).sublime-settings), the
 corresponding user file that gets opened will be Preferences.sublime-settings
 (in the Packages/User directory). This is due to the fact that platform-
-specific files in the User directory are ignored by Sublime Text.  Likewise, if
-you select any .sublime-keymap file, the appropriate platform-specific
+specific files in the User directory are ignored by Sublime Text. Likewise, if
+you select a .sublime-keymap file, the appropriate platform-specific
 .sublime-keymap file in the User directory will be opened.
 
-Note that this command is bound to the Ctrl+K, Ctrl+S key chord by default.
+Note that this command is bound to the Ctrl+K, Ctrl+S key chord by default, and
+is only available for users of Sublime Text 3.
 
 ================================================================================
 Easily Closing a Side-by-Side Window

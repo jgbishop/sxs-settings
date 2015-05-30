@@ -38,7 +38,7 @@ The "select a file" command opens a quick panel that displays all of the
 this list; more on why it does this in a second). When a file in the quick panel
 is selected, it becomes the "left" (or "top", depending on your settings) panel
 in the comparison window. The "right" (or "bottom") panel will contain the
-corresponding user settings file, typically located in the `Packages\User`
+corresponding user settings file, typically located in the `Packages/User`
 directory (hence why files in `User` are filtered out).
 
 Side-by-Side Settings tries to do the correct thing depending on the file you
