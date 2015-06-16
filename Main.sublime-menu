@@ -26,6 +26,11 @@
 								"args": { "file": "${packages}/User/sxs_settings.sublime-settings", "contents": "{\n\t$0\n}\n" }
 							},
 							{
+								"command": "open_file",
+								"caption": "Key Bindings - Default",
+								"args": { "file": "${packages}/Side-by-Side Settings/Default.sublime-keymap" }
+							},
+							{
 								"caption": "-"
 							},
 							{
