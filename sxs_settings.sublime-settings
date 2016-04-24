@@ -1,10 +1,14 @@
 {
-	// Specifies whether to arrange the views vertically using rows instead of
-	// horizontally using columns. Default value is false.
-	"display_using_rows" : false,
+    // Specifies whether to use new panes in the current window instead of a
+    // new window when viewing settings files. Default value is true.
+    "display_using_panes": true,
 
-	// Specifies whether to open Side-by-Side comparison windows in distraction
-	// free mode, essentially forcing the comparison window to be full screen.
-	// Default value is false.
-	"open_in_distraction_free": false
+    // Specifies whether to arrange the views vertically using rows instead of
+    // horizontally using columns. Default value is false.
+    "display_using_rows": false,
+
+    // Specifies whether to open Side-by-Side comparison windows in distraction
+    // free mode, essentially forcing the comparison window to be full screen.
+    // Default value is false.
+    "open_in_distraction_free": false
 }
