@@ -71,6 +71,7 @@ def openWindow(self, leftPath):
 	new_window.run_command("open_file", {'file': "${packages}/" + leftPath})
 	new_window.run_command("open_file", {'file': "${packages}/User/" + rightPath, 'contents': rightContents })
 	new_window.set_view_index(new_window.active_view(), 1, 0)
+	new_window.run_command("distraction_free_window")
 
 class sxsSettingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
