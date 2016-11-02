@@ -98,6 +98,7 @@ class SxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 
 class SxsSelectFileCommand(sublime_plugin.WindowCommand):
     file_list = []
+    last_index = -1
 
     def run(self):
         if close_window_if_needed(self):
@@ -120,7 +121,7 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
                 self.file_list.append(temp_item)
 
         self.file_list.sort()
-        self.window.show_quick_panel(self.file_list, self.on_done)
+        self.window.show_quick_panel(self.file_list, self.on_done, 0, self.last_index)
 
     def is_enabled(self):
         return (int(sublime.version()) >= 3000)
@@ -129,6 +130,7 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
         return (int(sublime.version()) >= 3000)
 
     def on_done(self, index):
+        self.last_index = index
         if index == -1:
             return
         open_window(self.window, self.file_list[index])
