@@ -38,7 +38,9 @@ def openWindow(self, leftPath):
 		    "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
 		})
 
-	if getSetting('open_in_distraction_free', False) == True:
+	new_window.run_command("distraction_free_window")
+
+	if getSetting('open_in_distraction_free', False):
 		new_window.run_command('toggle_distraction_free')
 		new_window.run_command('toggle_tabs')
 
@@ -71,7 +73,6 @@ def openWindow(self, leftPath):
 	new_window.run_command("open_file", {'file': "${packages}/" + leftPath})
 	new_window.run_command("open_file", {'file': "${packages}/User/" + rightPath, 'contents': rightContents })
 	new_window.set_view_index(new_window.active_view(), 1, 0)
-	new_window.run_command("distraction_free_window")
 
 class sxsSettingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
