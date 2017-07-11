@@ -94,3 +94,8 @@ at GitHub.
 
 ## Acknowledgements
 Thanks to Jeremy Bolding for providing several plug-in suggestions.
+
+## License
+See the `LICENSE` file under this repository.
+
+
