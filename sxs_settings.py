@@ -72,8 +72,18 @@ def openWindow(self, leftPath):
 		rightContents = "[\n\t$0\n]\n"; # Use array notation for sublime-keymap files
 
 	new_window.run_command("open_file", {'file': "${packages}/" + leftPath})
+	first_view = new_window.active_view()
+
 	new_window.run_command("open_file", {'file': "${packages}/User/" + rightPath, 'contents': rightContents })
-	new_window.set_view_index(new_window.active_view(), 1, 0)
+	second_view = new_window.active_view()
+
+	first_view.settings().set('edit_settings_view', 'base')
+	second_view.settings().set('edit_settings_view', 'other')
+
+	first_view.settings().set('edit_settings_other_view_id', second_view.id() )
+	second_view.settings().set('edit_settings_other_view_id', first_view.id() )
+
+	new_window.set_view_index(second_view, 1, 0)
 
 class sxsSettingsCommand(sublime_plugin.WindowCommand):
 	def run(self):
