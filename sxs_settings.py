@@ -1,6 +1,7 @@
 import sublime, sublime_plugin
 import re
 
+last_accessed_settings_input = 0
 _WINDOW_ID = None
 
 def closeWindowIfNeeded(self):
@@ -108,7 +109,7 @@ class sxsSelectFileCommand(sublime_plugin.WindowCommand):
 				self.fileList.append(tempItem)
 
 		self.fileList.sort()
-		self.window.show_quick_panel(self.fileList, self.onDone)
+		self.window.show_quick_panel(self.fileList, self.onDone, 0, last_accessed_settings_input)
 
 	def is_enabled(self):
 		return (int(sublime.version()) >= 3000)
@@ -117,6 +118,10 @@ class sxsSelectFileCommand(sublime_plugin.WindowCommand):
 		return (int(sublime.version()) >= 3000)
 
 	def onDone(self, index):
+		global last_accessed_settings_input
+
 		if index == -1:
 			return
+
+		last_accessed_settings_input = index
 		openWindow(self.window, self.fileList[index])
