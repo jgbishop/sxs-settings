@@ -1,49 +1,16 @@
-import sublime, sublime_plugin
+
 import re
 
+import sublime
+import sublime_plugin
+
+
 last_accessed_settings_input = 0
-_WINDOW_ID = None
-
-def closeWindowIfNeeded(self):
-	global _WINDOW_ID
-
-	if _WINDOW_ID is not None:
-		for i,w in enumerate(sublime.windows()):
-			if w.id() == _WINDOW_ID:
-				w.run_command("close_window")
-				_WINDOW_ID = None
-				return True
-	return False
 
 def getSetting(pref, default):
 	return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
 def openWindow(self, leftPath):
-	global _WINDOW_ID
-
-	# Self in this context is the active window
-	self.run_command("new_window")
-	new_window = sublime.active_window()
-	_WINDOW_ID = new_window.id()
-
-	if getSetting('display_using_rows', False) == True:
-		new_window.set_layout({
-		    "cols": [0, 1],
-		    "rows": [0, 0.5, 1],
-		    "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
-		})
-	else:
-		new_window.set_layout({
-		    "cols": [0, 0.5, 1],
-		    "rows": [0, 1],
-		    "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
-		})
-
-	new_window.run_command("distraction_free_window")
-
-	if getSetting('open_in_distraction_free', False):
-		new_window.run_command('toggle_distraction_free')
-		new_window.run_command('toggle_tabs')
 
 	lastSlash = leftPath.rfind("/")
 	rightPath = leftPath[(lastSlash+1):] # Extract the filename
@@ -67,44 +34,30 @@ def openWindow(self, leftPath):
 	elif re.search(r" \((?:Linux|OSX|Windows)\).sublime-settings", leftPath):
 		rightPath = re.sub(r" \((?:Linux|OSX|Windows)\)", "", rightPath)
 
-	rightContents = "{\n\t$0\n}\n" # Default to object notation for sublime-settings files
-	if re.search(r"\.sublime-keymap", leftPath):
-		rightContents = "[\n\t$0\n]\n"; # Use array notation for sublime-keymap files
+	rightContents = ""
 
-	new_window.run_command("open_file", {'file': "${packages}/" + leftPath})
-	first_view = new_window.active_view()
+	try:
+		import OverrideEditSettingsDefaultContents
 
-	new_window.run_command("open_file", {'file': "${packages}/User/" + rightPath, 'contents': rightContents })
-	second_view = new_window.active_view()
+	except ImportError:
 
-	first_view.settings().set('edit_settings_view', 'base')
-	second_view.settings().set('edit_settings_view', 'other')
+		rightContents = "{\n\t$0\n}\n" # Default to object notation for sublime-settings files
+		if re.search(r"\.sublime-keymap", leftPath):
+			rightContents = "[\n\t$0\n]\n"; # Use array notation for sublime-keymap files
 
-	first_view.settings().set('edit_settings_other_view_id', second_view.id() )
-	second_view.settings().set('edit_settings_other_view_id', first_view.id() )
+	sublime.active_window().run_command("edit_settings", {'base_file': "${packages}/" + leftPath, "default": rightContents})
+	active_window = sublime.active_window()
 
-	new_window.set_view_index(second_view, 1, 0)
-
-class sxsSettingsCommand(sublime_plugin.WindowCommand):
-	def run(self):
-		if closeWindowIfNeeded(self) == True:
-			return
-		openWindow(self.window, "Default/Preferences.sublime-settings")
-
-class sxsKeyBindingsCommand(sublime_plugin.WindowCommand):
-	def run(self):
-		if closeWindowIfNeeded(self) == True:
-			return
-		openWindow(self.window, "Default/Default ($platform).sublime-keymap")
+	if getSetting('open_in_distraction_free', False):
+		active_window.run_command('toggle_distraction_free')
+		active_window.run_command('toggle_tabs')
 
 class sxsSelectFileCommand(sublime_plugin.WindowCommand):
 	fileList = []
 
 	def run(self):
-		if closeWindowIfNeeded(self) == True:
-			return
-
-		self.fileList[:] = [] # Clear our cache
+		# Clear our cache
+		self.fileList[:] = []
 
 		settingsList = sublime.find_resources("*.sublime-settings")
 		keymapList = sublime.find_resources("*.sublime-keymap")
