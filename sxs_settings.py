@@ -42,6 +42,9 @@ def open_window(self, left_path):
             "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
         })
 
+    if get_setting('hide_minimap', False):
+        new_window.set_minimap_visible(False)
+
     if get_setting('open_in_distraction_free', False):
         new_window.run_command('toggle_distraction_free')
         new_window.run_command('toggle_tabs')
