@@ -1,0 +1,12 @@
+-------------------------------------
+Side-by-Side Settings - Version 1.4.0
+-------------------------------------
+
+New Features
+* New option to hide the minimap when opening a side-by-side session.
+* The previously selected item is now remembered when opening the select-a-file
+panel, just like the standard command palette.
+
+Changes
+* Support for Sublime Text 2 has been dropped in this version, now that Sublime
+Text 3 is officially available.

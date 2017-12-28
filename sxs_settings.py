@@ -126,12 +126,6 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
         self.file_list.sort()
         self.window.show_quick_panel(self.file_list, self.on_done, 0, self.last_index)
 
-    def is_enabled(self):
-        return (int(sublime.version()) >= 3000)
-
-    def is_visible(self):
-        return (int(sublime.version()) >= 3000)
-
     def on_done(self, index):
         self.last_index = index
         if index == -1:
