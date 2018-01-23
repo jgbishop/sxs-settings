@@ -56,7 +56,8 @@ def open_window(self, left_path):
 class SxsSelectFileCommand(sublime_plugin.WindowCommand):
 
     def __init__(self, window):
-        self.window = window
+        super(SxsSelectFileCommand, self).__init__(window)
+
         self.file_list = []
         self.last_index = -1
 
