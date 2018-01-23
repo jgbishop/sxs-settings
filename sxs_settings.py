@@ -3,12 +3,27 @@ import re
 import sublime
 import sublime_plugin
 
-import sublime
-import sublime_plugin
+
+def plugin_loaded():
+    global g_settings
+
+    g_settings = sublime.load_settings('sxs_settings.sublime-settings')
+    g_settings.clear_on_change('sxs_settings')
+
+    update_settings()
+    g_settings.add_on_change('sxs_settings', update_settings)
 
 
-def get_setting(pref, default):
-    return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
+def update_settings():
+    global g_hide_minimap
+    global g_open_in_distraction_free
+
+    g_hide_minimap = g_settings.get('hide_minimap', False)
+    g_open_in_distraction_free = g_settings.get('open_in_distraction_free', False)
+
+
+def plugin_unloaded():
+    g_settings.clear_on_change('sxs_settings')
 
 
 def open_window(self, left_path):
@@ -45,12 +60,17 @@ def open_window(self, left_path):
         # Use array notation for sublime-keymap files
         right_contents = "[\n\t$0\n]\n"
 
-    sublime.active_window().run_command("edit_settings", {'base_file': "${packages}/" + left_path, "default": right_contents})
     active_window = sublime.active_window()
+    active_window.run_command("edit_settings", {'base_file': "${packages}/" + left_path, "default": right_contents})
 
-    if get_setting('open_in_distraction_free', False):
-        active_window.run_command('toggle_distraction_free')
-        active_window.run_command('toggle_tabs')
+    new_window = sublime.active_window()
+
+    if g_hide_minimap:
+        new_window.set_minimap_visible(False)
+
+    if g_open_in_distraction_free:
+        new_window.run_command('toggle_distraction_free')
+        new_window.run_command('toggle_tabs')
 
 
 class SxsSelectFileCommand(sublime_plugin.WindowCommand):
