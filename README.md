@@ -8,10 +8,10 @@ it much easier to configure Sublime Text.
 There are two options for installing this package:
 
 #### [Package Control](https://sublime.wbond.net/) (Recommended)
-Side-by-Side Settings is available on Package Control. If you do not have the
-Package Control plug-in installed in Sublime Text, you should (it's super cool)!
+Side-by-Side Settings is available via Package Control. If you do not have the
+Package Control plug-in installed in Sublime Text, you should!
 Simply follow [these instructions](https://sublime.wbond.net/installation) to
-install it. Once it has been installed, search for and select  **Side-by-Side
+install it. Once it has been installed, search for and select **Side-by-Side
 Settings** in the `Install Package` command window.
 
 #### Git Clone
@@ -24,16 +24,13 @@ work as expected). Here's an example git clone command using SSH:
 
 ## Usage
 
-Side-by-Side Settings adds three new commands to the command palette (two if you
-are using Sublime Text 2):
+Side-by-Side Settings adds three new commands to the command palette:
 
-* **Side-by-Side: Select a File** - Opens a panel displaying all of the `.sublime-settings` and `.sublime-keymap` files in the Sublime Text environment (Sublime Text 3 only)
+* **Side-by-Side: Select a File** - Opens a panel displaying all of the `.sublime-settings` and `.sublime-keymap` files in the Sublime Text environment
 * **Side-by-Side: Sublime Settings** - Opens both default and user Sublime Text settings side by side in a new window
 * **Side-by-Side: Sublime Key Bindings** - Opens both default and user Sublime Text key bindings side by side in a new window
 
 #### Select a File Command
-
-This command is only available in Sublime Text 3.
 
 The "select a file" command opens a quick panel that displays all of the 
 `.sublime-settings` and `.sublime-keymap` files that Sublime Text knows about
@@ -82,6 +79,9 @@ settings:
 **display_using_rows**: This option specifies whether or not to arrange the
 side-by-side views vertically instead of horizontally. The default value for
 this option is false.
+
+**hide_minimap**: Specifies whether the minimap should be displayed or not when
+opening a side-by-side session. Defaults to false.
 
 **open_in_distraction_free**: This option allows the side-by-side window to open
 in distraction free mode, essentially resulting in a full-screen window. This

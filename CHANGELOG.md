@@ -1,5 +1,10 @@
 # Side-by-Side Settings Change Log
 
+## 1.4.0
+* Added a new option to hide the minimap when opening a side-by-side session.
+* The side-by-side quick panel now remembers the previously selected item.
+* Dropped support for Sublime Text 2.
+
 ## 1.3.1
 * Added a package-specific menu item to access the default key bindings file
 

@@ -1,90 +1,93 @@
 
 import re
+import sublime
+import sublime_plugin
 
 import sublime
 import sublime_plugin
 
 
-last_accessed_settings_input = 0
+def get_setting(pref, default):
+    return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
-def getSetting(pref, default):
-	return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
-def openWindow(self, leftPath):
+def open_window(self, left_path):
+    last_slash = left_path.rfind("/")
+    right_path = left_path[(last_slash+1):] # Extract the filename
 
-	lastSlash = leftPath.rfind("/")
-	rightPath = leftPath[(lastSlash+1):] # Extract the filename
+    # If we're opening a .sublime-keymap file, the right pane should always open
+    # to "Default ({platform}).sublime-keymap" since that's where keys should be
+    # put.
+    if re.search(r"\.sublime-keymap", left_path):
+        platform = sublime.platform()
 
-	# If we're opening a .sublime-keymap file, the right pane should always open
-	# to "Default ({platform}).sublime-keymap" since that's where keys should be
-	# put.
-	if re.search(r"\.sublime-keymap", leftPath):
-		platform = "Windows" # Assume this to start (evil, I know)
-		plat = sublime.platform()
-		if plat == "linux":
-			platform = "Linux"
-		elif plat == "osx":
-			platform = "OSX"
+        if platform == "linux":
+            platform = "Linux"
 
-		rightPath = "Default (" + platform + ").sublime-keymap"
+        elif platform == "osx":
+            platform = "OSX"
 
-	# Test to see if we are opening a platform-specific settings file. If so,
-	# strip the platform specific portion of the filename (platform-specific
-	# files are ignored in the User directory)
-	elif re.search(r" \((?:Linux|OSX|Windows)\).sublime-settings", leftPath):
-		rightPath = re.sub(r" \((?:Linux|OSX|Windows)\)", "", rightPath)
+        else:
+            platform = "Windows"
 
-	rightContents = ""
+        right_path = "Default (" + platform + ").sublime-keymap"
 
-	try:
-		import OverrideEditSettingsDefaultContents
+    # Test to see if we are opening a platform-specific settings file. If so,
+    # strip the platform specific portion of the filename (platform-specific
+    # files are ignored in the User directory)
+    elif re.search(r" \((?:Linux|OSX|Windows)\).sublime-settings", left_path):
+        right_path = re.sub(r" \((?:Linux|OSX|Windows)\)", "", right_path)
 
-	except ImportError:
+    # Default to object notation for sublime-settings files
+    right_contents = "{\n\t$0\n}\n"
 
-		rightContents = "{\n\t$0\n}\n" # Default to object notation for sublime-settings files
-		if re.search(r"\.sublime-keymap", leftPath):
-			rightContents = "[\n\t$0\n]\n"; # Use array notation for sublime-keymap files
+    if re.search(r"\.sublime-keymap", left_path):
+        # Use array notation for sublime-keymap files
+        right_contents = "[\n\t$0\n]\n"
 
-	sublime.active_window().run_command("edit_settings", {'base_file': "${packages}/" + leftPath, "default": rightContents})
-	active_window = sublime.active_window()
+    sublime.active_window().run_command("edit_settings", {'base_file': "${packages}/" + left_path, "default": right_contents})
+    active_window = sublime.active_window()
 
-	if getSetting('open_in_distraction_free', False):
-		active_window.run_command('toggle_distraction_free')
-		active_window.run_command('toggle_tabs')
+    if get_setting('open_in_distraction_free', False):
+        active_window.run_command('toggle_distraction_free')
+        active_window.run_command('toggle_tabs')
 
-class sxsSelectFileCommand(sublime_plugin.WindowCommand):
-	fileList = []
 
-	def run(self):
-		# Clear our cache
-		self.fileList[:] = []
+class SxsSelectFileCommand(sublime_plugin.WindowCommand):
 
-		settingsList = sublime.find_resources("*.sublime-settings")
-		keymapList = sublime.find_resources("*.sublime-keymap")
+    def __init__(self, window):
+        self.window = window
+        self.file_list = []
+        self.last_index = -1
 
-		tempList = settingsList + keymapList
+    def run(self):
+        # Clear our cache
+        del self.file_list[:]
 
-		for i, item in enumerate(tempList):
-			tempItem = re.sub(r"^Packages/", "", item)
-			if re.match(r"User/", tempItem):
-				continue # Ignore anything we find in the User directory (those will get treated as "right pane" files)
-			else:
-				self.fileList.append(tempItem)
+        settings_list = sublime.find_resources("*.sublime-settings")
+        keymap_list = sublime.find_resources("*.sublime-keymap")
 
-		self.fileList.sort()
-		self.window.show_quick_panel(self.fileList, self.onDone, 0, last_accessed_settings_input)
+        temp_list = settings_list + keymap_list
 
-	def is_enabled(self):
-		return (int(sublime.version()) >= 3000)
+        for i, item in enumerate(temp_list):
+            temp_item = re.sub(r"^Packages/", "", item)
 
-	def is_visible(self):
-		return (int(sublime.version()) >= 3000)
+            # Ignore anything we find in the User directory
+            # (those will get treated as "right pane" files)
+            if re.match(r"User/", temp_item):
+                continue
 
-	def onDone(self, index):
-		global last_accessed_settings_input
+            else:
+                self.file_list.append(temp_item)
 
-		if index == -1:
-			return
+        self.file_list.sort()
+        self.window.show_quick_panel(self.file_list, self.on_done, 0, self.last_index)
 
-		last_accessed_settings_input = index
-		openWindow(self.window, self.fileList[index])
+    def on_done(self, index):
+
+        if index == -1:
+            return
+
+        self.last_index = index
+        open_window(self.window, self.file_list[index])
+
