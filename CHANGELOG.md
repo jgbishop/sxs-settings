@@ -1,5 +1,8 @@
 # Side-by-Side Settings Change Log
 
+## 1.4.1
+* Fixed a bug in messages.json preventing the 1.4.0 messages file from appearing.
+
 ## 1.4.0
 * Added a new option to hide the minimap when opening a side-by-side session.
 * The side-by-side quick panel now remembers the previously selected item.
