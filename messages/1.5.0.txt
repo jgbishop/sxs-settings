@@ -1,0 +1,8 @@
+-------------------------------------
+Side-by-Side Settings - Version 1.5.0
+-------------------------------------
+
+A new "filter_platform" option has been added (default: true). When enabled,
+the file selection panel will filter out platform specific files that do not
+match your current platform (i.e. Linux and OSX files will be filtered out
+when on Windows). Thanks to Ben Felder for this suggestion!

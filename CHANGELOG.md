@@ -1,5 +1,8 @@
 # Side-by-Side Settings Change Log
 
+## 1.5.0
+* Added a new filter_platform option, allowing platform specific files to be filtered out of the file selection panel. Thanks to Ben Felder for suggesting this feature.
+
 ## 1.4.1
 * Fixed a bug in messages.json preventing the 1.4.0 messages file from appearing.
 

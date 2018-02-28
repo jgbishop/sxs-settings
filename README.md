@@ -80,6 +80,10 @@ settings:
 side-by-side views vertically instead of horizontally. The default value for
 this option is false.
 
+**filter_platform**: When enabled, platform specific files that do not match
+your current platform are filtered out of the files shown in the file selection
+panel. Defaults to true.
+
 **hide_minimap**: Specifies whether the minimap should be displayed or not when
 opening a side-by-side session. Defaults to false.
 
@@ -93,4 +97,7 @@ issue over on the [issues page](https://github.com/jgbishop/sxs-settings/issues)
 at GitHub.
 
 ## Acknowledgements
-Thanks to Jeremy Bolding for providing several plug-in suggestions.
+My thanks to the following folks:
+
+* Jeremy Bolding for providing several plug-in suggestions.
+* Ben Felder for suggesting the filter_platform option.

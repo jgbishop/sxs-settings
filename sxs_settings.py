@@ -102,12 +102,20 @@ class SxsKeyBindingsCommand(sublime_plugin.WindowCommand):
 class SxsSelectFileCommand(sublime_plugin.WindowCommand):
     file_list = []
     last_index = -1
+    platform_filter = {
+        'linux': ('OSX', 'Windows'),
+        'osx': ('Linux', 'Windows'),
+        'windows': ('Linux', 'OSX'),
+    }
 
     def run(self):
         if close_window_if_needed(self):
             return
 
         self.file_list[:] = []  # Clear our cache
+
+        platforms_to_filter = self.__class__.platform_filter.get(sublime.platform())
+        do_filter = get_setting("filter_platform", True)
 
         settings_list = sublime.find_resources("*.sublime-settings")
         keymap_list = sublime.find_resources("*.sublime-keymap")
@@ -121,6 +129,17 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
                 # (those will get treated as "right pane" files)
                 continue
             else:
+                # Skip the necessary platforms if we're filtering on platform
+                if do_filter:
+                    skip = False
+                    for p in platforms_to_filter:
+                        if(p in str(temp_item)):
+                            skip = True
+                            break
+
+                    if skip:
+                        continue
+
                 self.file_list.append(temp_item)
 
         self.file_list.sort()
