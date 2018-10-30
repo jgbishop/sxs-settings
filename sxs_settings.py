@@ -2,53 +2,12 @@ import re
 import sublime
 import sublime_plugin
 
-_WINDOW_ID = None
-
-
-def close_window_if_needed(self):
-    global _WINDOW_ID
-
-    if _WINDOW_ID is not None:
-        for i, w in enumerate(sublime.windows()):
-            if w.id() == _WINDOW_ID:
-                w.run_command("close_window")
-                _WINDOW_ID = None
-                return True
-    return False
-
 
 def get_setting(pref, default):
     return sublime.load_settings('sxs_settings.sublime-settings').get(pref, default)
 
 
 def open_window(self, left_path):
-    global _WINDOW_ID
-
-    # Self in this context is the active window
-    self.run_command("new_window")
-    new_window = sublime.active_window()
-    _WINDOW_ID = new_window.id()
-
-    if get_setting('display_using_rows', False):
-        new_window.set_layout({
-            "cols": [0, 1],
-            "rows": [0, 0.5, 1],
-            "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
-        })
-    else:
-        new_window.set_layout({
-            "cols": [0, 0.5, 1],
-            "rows": [0, 1],
-            "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
-        })
-
-    if get_setting('hide_minimap', False):
-        new_window.set_minimap_visible(False)
-
-    if get_setting('open_in_distraction_free', False):
-        new_window.run_command('toggle_distraction_free')
-        new_window.run_command('toggle_tabs')
-
     last_slash = left_path.rfind("/")
     right_path = left_path[(last_slash + 1):]  # Extract the filename
 
@@ -75,27 +34,26 @@ def open_window(self, left_path):
     if re.search(r"\.sublime-keymap", left_path):
         right_contents = "[\n\t$0\n]\n"  # Use array notation for sublime-keymap files
 
-    new_window.run_command("open_file", {'file': "${packages}/" + left_path})
-    new_window.run_command(
-        "open_file", {
-            'file': "${packages}/User/" + right_path,
-            'contents': right_contents
-        }
+    sublime.active_window().run_command(
+        "edit_settings", {"base_file": "${packages}/" + left_path, "default": right_contents}
     )
-    new_window.set_view_index(new_window.active_view(), 1, 0)
+    active_window = sublime.active_window()
+
+    if get_setting('hide_minimap', False):
+        active_window.set_minimap_visible(False)
+
+    if get_setting('open_in_distraction_free', False):
+        active_window.run_command('toggle_distraction_free')
+        active_window.run_command('toggle_tabs')
 
 
 class SxsSettingsCommand(sublime_plugin.WindowCommand):
     def run(self):
-        if close_window_if_needed(self):
-            return
         open_window(self.window, "Default/Preferences.sublime-settings")
 
 
 class SxsKeyBindingsCommand(sublime_plugin.WindowCommand):
     def run(self):
-        if close_window_if_needed(self):
-            return
         open_window(self.window, "Default/Default ($platform).sublime-keymap")
 
 
@@ -109,9 +67,6 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
     }
 
     def run(self):
-        if close_window_if_needed(self):
-            return
-
         self.file_list[:] = []  # Clear our cache
 
         platforms_to_filter = self.__class__.platform_filter.get(sublime.platform())
