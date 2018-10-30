@@ -1,0 +1,3 @@
+[
+	{ "keys": ["ctrl+k", "ctrl+s"], "command": "sxs_select_file" }
+]
