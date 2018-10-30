@@ -1,0 +1,7 @@
+Side-by-Side Settings - 1.6.0
+
+The machinery to open settings files has been greatly simplified and now uses
+the built-in edit_settings command. As a result, the "display_using_rows"
+preference has been removed.
+
+Settings windows can now be closed with the typical Ctrl+W keyboard shortcut.

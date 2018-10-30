@@ -1,5 +1,10 @@
 # Side-by-Side Settings Change Log
 
+## 1.6.0
+* Opening settings files now uses the built-in edit_settings command, simplifying the codebase considerably.
+* Side-by-side settings windows can now simply be closed by using the typical Ctrl+W keyboard shortcut.
+* The display_using_rows preference has been removed.
+
 ## 1.5.0
 * Added a new filter_platform option, allowing platform specific files to be filtered out of the file selection panel. Thanks to Ben Felder for suggesting this feature.
 
