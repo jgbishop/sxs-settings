@@ -95,7 +95,7 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
 
             # Ignore anything we find in the User directory
             # (those will get treated as "right pane" files)
-            if re.match(r"User/", temp_item):
+            if re.match(r"0_settings_loader/|User/", temp_item):
                 continue
 
             else:
