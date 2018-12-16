@@ -16,19 +16,14 @@
 						"children":
 						[
 							{
-								"command": "open_file",
-								"caption": "Settings - Default",
-								"args": { "file": "${packages}/Side-by-Side Settings/sxs_settings.sublime-settings" }
+								"command": "edit_settings",
+								"caption": "Settings",
+								"args": { "base_file": "${packages}/Side-by-Side Settings/sxs_settings.sublime-settings" }
 							},
 							{
-								"command": "open_file",
-								"caption": "Settings - User",
-								"args": { "file": "${packages}/User/sxs_settings.sublime-settings", "contents": "{\n\t$0\n}\n" }
-							},
-							{
-								"command": "open_file",
-								"caption": "Key Bindings - Default",
-								"args": { "file": "${packages}/Side-by-Side Settings/Default.sublime-keymap" }
+								"command": "edit_settings",
+								"caption": "Key Bindings",
+								"args": { "base_file": "${packages}/Side-by-Side Settings/Default (${platform}).sublime-keymap" }
 							},
 							{
 								"caption": "-"

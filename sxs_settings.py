@@ -16,9 +16,11 @@ def plugin_loaded():
 
 def update_settings():
     global g_hide_minimap
+    global g_filter_platform
     global g_open_in_distraction_free
 
     g_hide_minimap = g_settings.get('hide_minimap', False)
+    g_filter_platform = g_settings.get('filter_platform', False)
     g_open_in_distraction_free = g_settings.get('open_in_distraction_free', False)
 
 
@@ -75,6 +77,12 @@ def open_window(self, left_path):
 
 class SxsSelectFileCommand(sublime_plugin.WindowCommand):
 
+    platform_filter = {
+        'linux': ('OSX', 'Windows'),
+        'osx': ('Linux', 'Windows'),
+        'windows': ('Linux', 'OSX'),
+    }
+
     def __init__(self, window):
         super(SxsSelectFileCommand, self).__init__(window)
 
@@ -84,6 +92,7 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
     def run(self):
         # Clear our cache
         del self.file_list[:]
+        platforms_to_filter = self.platform_filter.get(sublime.platform())
 
         settings_list = sublime.find_resources("*.sublime-settings")
         keymap_list = sublime.find_resources("*.sublime-keymap")
@@ -99,6 +108,17 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
                 continue
 
             else:
+                # Skip the necessary platforms if we're filtering on platform
+                if g_filter_platform:
+                    skip = False
+                    for p in platforms_to_filter:
+                        if(p in str(temp_item)):
+                            skip = True
+                            break
+
+                    if skip:
+                        continue
+
                 self.file_list.append(temp_item)
 
         self.file_list.sort()

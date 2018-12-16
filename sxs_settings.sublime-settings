@@ -1,7 +1,6 @@
 {
-	// Specifies whether to arrange the views vertically using rows instead of
-	// horizontally using columns. Default value is false.
-	"display_using_rows" : false,
+	// Filters platform specific files from the list. Default value is true.
+	"filter_platform": true,
 
 	// Hides the minimap in the comparison window. Default value is false.
 	"hide_minimap": false,

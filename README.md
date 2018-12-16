@@ -36,10 +36,9 @@ The "select a file" command opens a quick panel that displays all of the
 `.sublime-settings` and `.sublime-keymap` files that Sublime Text knows about
 (note that files located in the `Packages/User` directory are filtered out of
 this list; more on why it does this in a second). When a file in the quick panel
-is selected, it becomes the "left" (or "top", depending on your settings) panel
-in the comparison window. The "right" (or "bottom") panel will contain the
-corresponding user settings file, typically located in the `Packages/User`
-directory (hence why files in `User` are filtered out).
+is selected, it becomes the "left" panel in the comparison window. The "right"
+panel will contain the corresponding user settings file, typically located in
+the `Packages/User` directory (hence why files in `User` are filtered out).
 
 Side-by-Side Settings tries to do the correct thing depending on the file you
 select in the quick panel. If the file you select is a platform-specific
@@ -49,13 +48,6 @@ corresponding user file that gets opened will be `Preferences.sublime-settings`
 specific files in the `User` directory are ignored by Sublime Text. Likewise, if
 you select any `.sublime-keymap` file, the appropriate platform-specific
 `.sublime-keymap` file in the `User` directory will be opened.
-
-#### Easily Closing a Side-by-Side Window
-
-To close the window that opens up when a Side-by-Side Settings command is
-issued, simply issue the same command a second time. The window that opened up
-will be closed for you! This is a particularly helpful feature when a command is
-bound to a keyboard shortcut.
 
 #### Default Keyboard Shortcut
 
@@ -76,9 +68,9 @@ Here's an example key binding:
 Side-by-Side Settings currently supports the following plug-in specific 
 settings:
 
-**display_using_rows**: This option specifies whether or not to arrange the
-side-by-side views vertically instead of horizontally. The default value for
-this option is false.
+**filter_platform**: When enabled, platform specific files that do not match
+your current platform are filtered out of the files shown in the file selection
+panel. Defaults to true.
 
 **hide_minimap**: Specifies whether the minimap should be displayed or not when
 opening a side-by-side session. Defaults to false.
@@ -92,10 +84,12 @@ If you spot a bug in this plug-in, or you have a feature request, please open an
 issue over on the [issues page](https://github.com/jgbishop/sxs-settings/issues)
 at GitHub.
 
-## Acknowledgements
-Thanks to Jeremy Bolding for providing several plug-in suggestions.
-
 ## License
 See the `LICENSE` file under this repository.
 
 
+## Acknowledgements
+My thanks to the following folks:
+
+* Jeremy Bolding for providing several plug-in suggestions.
+* Ben Felder for suggesting the filter_platform option.
