@@ -41,7 +41,9 @@
 						]
 					}
 				]
-			}
+			},
+            { "caption": "-", "id": "quick-settings" },
+			{ "caption": "Window Settings...", "command": "sxs_select_file" },
 		]
 	}
 ]
