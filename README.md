@@ -5,24 +5,15 @@ new window. It also works for key bindings and plug-in specific settings, making
 it much easier to configure Sublime Text.
 
 ## Installation
-There are two options for installing this package:
-
-#### [Package Control](https://sublime.wbond.net/) (Recommended)
-Side-by-Side Settings is available via Package Control. If you do not have the
-Package Control plug-in installed in Sublime Text, you should!
-Simply follow [these instructions](https://sublime.wbond.net/installation) to
-install it. Once it has been installed, search for and select **Side-by-Side
-Settings** in the `Install Package` command window.
 
 #### Git Clone
 You can also clone this repository into your Sublime Text Packages directory
-using Git, if you feel so inclined. If you do use Git, make sure to clone using
-the appropriate folder name of **Side-by-Side Settings** (so that the menu items
-work as expected). Here's an example git clone command using SSH:
-
-`git clone git@github.com:jgbishop/sxs-settings.git "Side-by-Side Settings"`
+using Git:
+`git clone https://github.com/evandroforks/SideBySideSettings`
 
 ## Usage
+
+`{ "keys": ["ctrl+k", "ctrl+s"], "command": "sxs_settings" }`
 
 Side-by-Side Settings adds three new commands to the command palette:
 
@@ -61,7 +52,7 @@ the internal command names to use:
 
 Here's an example key binding:
 
-`{ "keys": ["ctrl+k", "ctrl+p"], "command": "sxs_settings" }`
+`{ "keys": ["ctrl+k", "ctrl+s"], "command": "sxs_settings" }`
 
 ## Plug-in Settings
 
