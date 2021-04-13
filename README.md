@@ -63,6 +63,20 @@ Here's an example key binding:
 
 `{ "keys": ["ctrl+k", "ctrl+p"], "command": "sxs_settings" }`
 
+#### Setting a Keyboard Shortcut to Open a Specific File
+
+You can also set up a keyboard shortcut to open a specific file by accessing `sxs_open_file`, a command which isn't available through the Command Palette and only exists for the purposes of creating such keyboard shortcuts.
+
+An example keybind is:
+
+```
+{ "keys": ["Alt+Shift+f8"], "command": "sxs_open_file",
+    "args": { "base_file": "Side-by-Side Settings/sxs_settings.sublime-settings" }
+}
+```
+
+Any number of such keybinds can be set, giving you access to the files you want with a single key stroke or set of keys and bypassing the Command Palette entirely.
+
 ## Plug-in Settings
 
 Side-by-Side Settings currently supports the following plug-in specific 

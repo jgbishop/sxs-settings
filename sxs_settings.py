@@ -105,3 +105,16 @@ class SxsSelectFileCommand(sublime_plugin.WindowCommand):
         if index == -1:
             return
         open_window(self.window, self.file_list[index])
+
+
+class SxsOpenFileCommand(sublime_plugin.WindowCommand):
+    """
+    This class just exists so that you can create a custom single keybind to open any file you want
+
+    Example:
+        { "keys": ["Alt+Shift+f8"], "command": "sxs_open_file",
+            "args": { "base_file": "Side-by-Side Settings/sxs_settings.sublime-settings" }
+        }
+    """
+    def run(self, base_file: str):
+        open_window(self.window, base_file)
